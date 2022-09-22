@@ -24,14 +24,14 @@ class TicTacToe
     /// <returns>A list of 9 strings representing each square.</returns>
     static List<string> GetNewBoard()
     {
-        return new List<string>{ "1", "2", "3", "4" };
+        return new List<string>{ "1", "2", "3", "4", "5", "6", "7", "8", "9" };
     }
 
     /// <summary>Displays the board in a 3x3 grid.</summary>
     /// <param name="board">The board</param>
     static void DisplayBoard(List<string> board)
     {
-
+        
     }
 
     /// <summary>
