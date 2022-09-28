@@ -24,7 +24,13 @@ class TicTacToe
     /// <returns>A list of 9 strings representing each square.</returns>
     static List<string> GetNewBoard()
     {
-        return new List<string>{ "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        List<string> board = new List<string>();
+
+        for (int i = 1; i <= 9; i++)
+        {
+            board.Add(i.ToString());
+        }
+        return board;
     }
 
     /// <summary>Displays the board in a 3x3 grid.</summary>
@@ -32,9 +38,9 @@ class TicTacToe
     static void DisplayBoard(List<string> board)
     {
         Console.WriteLine($"{board[0]}|{board[1]}|{board[2]}");
-        Console.WriteLine($"-+-+-");
+        Console.WriteLine("-+-+-");
         Console.WriteLine($"{board[3]}|{board[4]}|{board[5]}");
-        Console.WriteLine($"-+-+-");
+        Console.WriteLine("-+-+-");
         Console.WriteLine($"{board[6]}|{board[7]}|{board[8]}");
     }
 
@@ -45,8 +51,15 @@ class TicTacToe
     /// <returns>True if the game is over</returns>
     static bool IsGameOver(List<string> board)
     {
-        return IsWinner(board, "x") || IsWinner(board, "o") || IsTie(board);
-         
+        bool IsGameOver = false; 
+
+        if (IsWinner(board, "x") || IsWinner(board, "o") || IsTie(board))
+        {
+            IsGameOver = true;
+        }
+        
+        return IsGameOver;
+
     }
 
     /// <summary>Determines if the provided player has a tic tac toe.</summary>
@@ -54,16 +67,39 @@ class TicTacToe
     /// <param name="player">The player to check for a win</param>
     /// <returns></returns>
     static bool IsWinner(List<string> board, string player)
-    {
-        return false;
+    { 
+        if (board[0] == player && board[1] == player && board[2] == player)
+        {
+            return true;
+        }
+
+        if (board[3] == player && board[4] == player && board[5] == player)
+        {
+            return true;
+        }
+
+        if (board[6] == player && board[7] == player && board[8] == player)
+        {
+            return true;
+        }
+        return false; 
     }
 
     /// <summary>Determines if the board is full with no more moves possible.</summary>
     /// <param name="board">The current board.</param>
     /// <returns>True if the board is full.</returns>
     static bool IsTie(List<string> board)
-    {
-        return false;
+    { 
+        
+        foreach (string value in board)
+        {
+            if (char.IsDigit(value[0]))
+            {
+                return false;
+            }
+        
+        }
+        return true;
     }
 
     /// <summary>Cycles through the players (from x to o and o to x)</summary>
@@ -71,7 +107,14 @@ class TicTacToe
     /// <returns>The next players sign (x or o)</returns>
     static string GetNextPlayer(string currentPlayer)
     {
-        return "x";
+        string nextPlayer = "x";
+
+            if (currentPlayer == "x")
+            {
+                nextPlayer = "o";
+            }
+
+        return nextPlayer;
     }
 
     /// <summary>Gets the 1-based spot number associated with the user's choice.</summary>
@@ -79,7 +122,11 @@ class TicTacToe
     /// <returns>A 1-based spot number (not a 0-based index)</returns>
     static int GetMoveChoice(string currentPlayer)
     {
-        return 1;
+        Console.Write($"{currentPlayer}'s turn to choose a square (1-9): ");
+        string move_string = Console.ReadLine();
+
+        int choice = int.Parse(move_string);
+        return choice;
     }
 
     /// <summary>
@@ -91,6 +138,8 @@ class TicTacToe
     /// <param name="currentPlayer">The current player's sign (x or o)</param>
     static void MakeMove(List<string> board, int choice, string currentPlayer)
     {
+        int index = choice - 1;
 
+        board[index] = currentPlayer; 
     }
 }
