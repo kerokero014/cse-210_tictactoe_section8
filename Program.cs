@@ -82,6 +82,32 @@ class TicTacToe
         {
             return true;
         }
+        
+        if (board[0] == player && board[3] == player && board[6] == player)
+        {
+            return true; 
+        }
+
+        if (board[1] == player && board[4] == player && board[7] == player)
+        {
+            return true; 
+        }
+
+        if (board[2] == player && board[5] == player && board[8] == player)
+        {
+            return true; 
+        }
+
+        if  (board[0] == player && board[4] == player && board[8] == player)
+        {
+            return true; 
+        }
+
+        if (board[2] == player && board[4] == player && board[6] == player)
+        {
+            return true; 
+        }
+
         return false; 
     }
 
@@ -123,7 +149,7 @@ class TicTacToe
     static int GetMoveChoice(string currentPlayer)
     {
         Console.Write($"{currentPlayer}'s turn to choose a square (1-9): ");
-        string move_string = Console.ReadLine();
+        string? move_string = Console.ReadLine() ;
 
         int choice = int.Parse(move_string);
         return choice;
